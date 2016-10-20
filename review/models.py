@@ -381,3 +381,14 @@ class Rating(models.Model):
 
     def __str__(self):
         return '{0}/{1} - {2}'.format(self.category, self.review, self.value)
+
+    
+class Reply(models.Model):
+    reply_text= models.CharField(max_length=500,null=True,blank= True)
+    reviewed_item = models.ForeignKey('review.Review',on_delete = models.CASCADE)
+
+    user = models.ForeignKey(
+        getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
+        verbose_name=_('User'),
+        blank=True, null=True,
+    )
